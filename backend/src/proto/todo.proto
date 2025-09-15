@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package todo;
+
+// Todo service definition
+service TodoService {
+  // Get all todos
+  rpc GetTodos(GetTodosRequest) returns (GetTodosResponse);
+
+  // Create a new todo
+  rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse);
+
+  // Update an existing todo
+  rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse);
+
+  // Delete a todo
+  rpc DeleteTodo(DeleteTodoRequest) returns (DeleteTodoResponse);
+}
+
+// Todo message
+message Todo {
+  int32 id = 1;
+  string description = 2;
+  bool completed = 3;
+  string createdAt = 4;  // ISO 8601 timestamp
+  string updatedAt = 5;  // ISO 8601 timestamp
+}
+
+// Request messages
+message GetTodosRequest {
+  // Empty for now - could add filtering/pagination later
+}
+
+message CreateTodoRequest {
+  string description = 1;  // Required, 1-500 characters
+}
+
+message UpdateTodoRequest {
+  int32 id = 1;            // Required - todo ID to update
+  optional string description = 2;  // Optional - new description
+  optional bool completed = 3;      // Optional - new completion status
+}
+
+message DeleteTodoRequest {
+  int32 id = 1;  // Required - todo ID to delete
+}
+
+// Response messages
+message GetTodosResponse {
+  repeated Todo todos = 1;
+}
+
+message CreateTodoResponse {
+  Todo todo = 1;
+}
+
+message UpdateTodoResponse {
+  Todo todo = 1;
+}
+
+message DeleteTodoResponse {
+  // Empty response for successful deletion
+}
+
+// Error handling
+message ErrorDetail {
+  string field = 1;
+  string message = 2;
+}
+
+message ErrorResponse {
+  string message = 1;
+  int32 code = 2;
+  repeated ErrorDetail details = 3;
+}
