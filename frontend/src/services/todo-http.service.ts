@@ -1,4 +1,4 @@
-interface Todo {
+export interface Todo {
   id: number;
   description: string;
   completed: boolean;
@@ -121,4 +121,3 @@ class TodoHttpServiceImpl implements TodoServiceInterface {
 }
 
 export const TodoService = new TodoHttpServiceImpl();
-export type { TodoServiceInterface, Todo };

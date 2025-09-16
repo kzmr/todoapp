@@ -125,6 +125,3 @@ class TodoGrpcServiceImpl implements TodoGrpcClientInterface {
 
 // Export singleton instance
 export const TodoGrpcService = new TodoGrpcServiceImpl();
-
-// Export interface for testing
-export type { TodoGrpcClientInterface };
